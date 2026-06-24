@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AI Content Pack Kit</title><style>
+:root{
+  --bg:#040713;--panel:#071225;--panel2:#0d1a34;--line:rgba(255,255,255,.09);
+  --text:#f8fbff;--muted:#98a8c4;--blue:#4bd8ff;--purple:#8b5cf6;--green:#34d399;
+  --yellow:#facc15;--pink:#fb7185;--shadow:0 24px 70px rgba(0,0,0,.36);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(75,216,255,.18),transparent 30%),
+    radial-gradient(circle at 90% 6%,rgba(139,92,246,.22),transparent 30%),
+    linear-gradient(135deg,#02040d,#071225 58%,#040713);
+  min-height:100vh;color:var(--text)
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.11;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:60px 60px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 88%);
+}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{display:grid;grid-template-columns:308px minmax(0,1fr);min-height:100vh}
+.sidebar{
+  position:sticky;top:0;height:100vh;overflow:auto;padding:18px 14px;
+  background:linear-gradient(180deg,rgba(6,12,25,.97),rgba(3,7,16,.98));
+  border-right:1px solid var(--line);z-index:2
+}
+.logo{display:flex;gap:12px;align-items:center;padding:10px 8px 16px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.mark{width:48px;height:48px;border-radius:17px;display:grid;place-items:center;font-weight:950;background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 16px 40px rgba(75,216,255,.22)}
+.logo h1{font-size:19px;line-height:1.05;letter-spacing:-.05em}.logo p{font-size:12px;color:var(--muted);margin-top:4px}
+.price-card{
+  border:1px solid rgba(75,216,255,.18);border-radius:24px;padding:18px;margin:12px 0 14px;
+  background:linear-gradient(135deg,rgba(75,216,255,.10),rgba(139,92,246,.13))
+}
+.price-card span{font-size:11px;font-weight:900;color:#cffafe;text-transform:uppercase;letter-spacing:.08em}
+.price-card strong{display:block;font-size:34px;letter-spacing:-.06em;margin:6px 0}.price-card small{color:var(--muted)}
+.nav{display:grid;gap:8px}.nav button{width:100%;border:1px solid transparent;border-radius:16px;background:transparent;color:#d7e2f5;padding:12px;text-align:left;font-weight:850;display:flex;justify-content:space-between;gap:8px}
+.nav button:hover,.nav button.active{background:linear-gradient(135deg,rgba(75,216,255,.12),rgba(139,92,246,.12));border-color:rgba(103,232,249,.18);color:#fff}
+.side-note{margin-top:16px;border:1px solid rgba(52,211,153,.18);border-radius:22px;background:rgba(52,211,153,.08);padding:15px;color:#c7f9df;font-size:13px;line-height:1.45}
+.main{position:relative;padding:24px 26px 34px;min-width:0}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:18px}
+.kicker,.tag{display:inline-flex;border:1px solid rgba(75,216,255,.2);border-radius:999px;background:rgba(75,216,255,.08);color:#d9fbff;font-size:12px;font-weight:900;padding:7px 11px}
+.tag.green{background:rgba(52,211,153,.11);border-color:rgba(52,211,153,.22);color:#bbf7d0}.tag.yellow{background:rgba(250,204,21,.10);border-color:rgba(250,204,21,.22);color:#fde68a}
+.topbar h2{font-size:34px;letter-spacing:-.07em;margin-top:8px}.topbar p{color:var(--muted);max-width:790px;line-height:1.55;margin-top:5px}
+.btn{border:1px solid var(--line);border-radius:16px;padding:11px 15px;color:#fff;font-weight:900;background:rgba(255,255,255,.06);display:inline-flex;align-items:center;gap:8px;justify-content:center;text-decoration:none}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));border-color:transparent;box-shadow:0 14px 38px rgba(75,216,255,.18)}
+.btn.green{background:linear-gradient(135deg,#22c55e,#14b8a6);border-color:transparent}.btn.full{width:100%}.btn.small{padding:8px 10px;border-radius:12px;font-size:12px}
+.section{display:none}.section.active{display:block}
+.hero{border:1px solid rgba(103,232,249,.14);border-radius:34px;padding:34px;margin-bottom:16px;background:linear-gradient(135deg,rgba(14,28,54,.92),rgba(8,15,30,.88));box-shadow:var(--shadow);overflow:hidden;position:relative}
+.hero:after{content:"";position:absolute;right:-130px;top:-130px;width:360px;height:360px;background:radial-gradient(circle,rgba(75,216,255,.16),transparent 65%)}
+.hero-content{position:relative;display:grid;grid-template-columns:1fr .9fr;gap:24px;align-items:center;z-index:1}
+.hero h1{font-size:58px;line-height:.95;letter-spacing:-.09em;margin:14px 0 12px}.grad{background:linear-gradient(135deg,#67e8f9,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:#dbe8f7;line-height:1.62;font-size:16px}.hero-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.grid{display:grid;gap:14px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:linear-gradient(180deg,rgba(16,29,56,.88),rgba(8,16,32,.94));border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 16px 38px rgba(0,0,0,.22);min-width:0}
+.card h3{letter-spacing:-.04em;margin-bottom:8px}.card p,.muted{color:var(--muted);font-size:13.5px;line-height:1.55}
+.stat span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#d7e5ff;font-weight:900}.stat strong{display:block;font-size:32px;letter-spacing:-.06em;margin:8px 0}.stat small{color:var(--muted)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin:22px 0 12px}.section-head h2{font-size:30px;letter-spacing:-.06em}.section-head p{max-width:600px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field label{display:block;font-size:12px;font-weight:850;color:#dbeafe;margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:rgba(2,8,20,.72);color:#fff;padding:11px 12px;outline:none}.field textarea{min-height:88px;resize:vertical}
+.output{border:1px solid rgba(75,216,255,.16);background:rgba(2,8,20,.64);border-radius:22px;padding:18px;min-height:420px;color:#dbeafe;font-size:13.5px;line-height:1.6;overflow:auto;white-space:pre-wrap}
+.output-html{white-space:normal}.output-html h1,.output-html h2,.output-html h3{margin:12px 0 8px;color:#fff}.output-html p,.output-html li{color:#dbeafe;line-height:1.55}.output-html ul,.output-html ol{padding-left:20px}.miniBox{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.035);border-radius:16px;padding:12px;margin:10px 0}
+.preview-frame{width:100%;height:680px;border:0;border-radius:22px;background:#fff;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.final-doc{background:#fff;color:#111827;border-radius:22px;padding:34px;box-shadow:0 24px 70px rgba(0,0,0,.25);max-width:1020px;margin:auto}
+.final-doc h1,.final-doc h2,.final-doc h3{color:#0f172a;margin:14px 0 8px}.final-doc p,.final-doc li{color:#334155;line-height:1.6}.final-doc ul,.final-doc ol{padding-left:22px}.final-doc .docbox{border:1px solid #e2e8f0;background:#f8fafc;border-radius:16px;padding:14px;margin:10px 0}.final-doc .pill{display:inline-flex;background:#e0f2fe;color:#0369a1;border-radius:999px;padding:6px 10px;font-weight:900;font-size:12px}
+.code-box{white-space:pre-wrap;background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px;color:#dbeafe;font-size:12.5px;line-height:1.5;max-height:580px;overflow:auto}
+.checklist{display:grid;gap:10px;margin-top:12px}.check{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:15px;padding:12px 13px;color:#dbeafe;font-size:14px;line-height:1.45}
+.script{white-space:pre-wrap;background:rgba(2,8,20,.70);border:1px solid var(--line);border-radius:18px;padding:15px;color:#dbeafe;font-size:13.5px;line-height:1.58}
+.lead-list{display:grid;gap:10px}.lead-row{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.035);padding:12px}
+.review{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035);padding:14px}.stars{color:#fde68a;letter-spacing:2px;margin-bottom:7px}.review footer{display:flex;justify-content:space-between;gap:10px;color:#93a4bd;font-size:12px;margin-top:10px}
+.faq{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035);padding:16px}.faq h4{margin-bottom:8px}
+.footer{margin:18px 0 0;text-align:center;color:#6f8099;font-size:12px}.toast{position:fixed;right:22px;bottom:22px;z-index:90;border:1px solid rgba(75,216,255,.18);border-radius:16px;background:linear-gradient(135deg,rgba(75,216,255,.18),rgba(139,92,246,.18));box-shadow:var(--shadow);padding:12px 14px;opacity:0;transform:translateY(14px);transition:.25s}.toast.show{opacity:1;transform:none}
+@media(max-width:1060px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.hero-content,.grid-2,.grid-3,.grid-4,.form-grid{grid-template-columns:1fr}.hero h1{font-size:40px}.topbar,.section-head{flex-direction:column;align-items:flex-start}.main{padding:16px}.preview-frame{height:560px}}
+</style></head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo"><div class="mark">CP</div><div><h1>AI Content Pack Kit</h1><p>Standalone PathPay product</p></div></div>
+  <div class="price-card"><span>One-time product</span><strong>$39</strong><small>Recommended Gumroad price</small></div>
+  <div class="nav">
+    <button class="active" onclick="showSection('home',this)">Overview <span>⌘</span></button>
+    <button onclick="showSection('lead',this)">Lead Finder <span>↗</span></button>
+    <button onclick="showSection('generator',this)">Final Product Generator <span>✦</span></button>
+    <button onclick="showSection('preview',this)">Final Product Preview <span>👁</span></button>
+    <button onclick="showSection('code',this)">Get The Product <span>↓</span></button>
+    <button onclick="showSection('howto',this)">How To Use It <span>↪</span></button>
+    <button onclick="showSection('scripts',this)">Scripts + Follow-Up <span>✎</span></button>
+    <button onclick="showSection('pricing',this)">Pricing + Selling <span>$</span></button>
+    <button onclick="showSection('delivery',this)">Delivery Checklist <span>✓</span></button>
+    <button onclick="showSection('reviews',this)">Reviews + Results <span>★</span></button>
+    <button onclick="showSection('faq',this)">FAQ <span>?</span></button>
+  </div>
+  <div class="side-note"><strong>V3:</strong><br>Generates the real final product, shows it, and lets the user copy/download it. Outputs change every time.</div>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div><span class="kicker">AI Content Pack Kit</span><h2 id="title">Overview</h2><p id="subtitle">Create the actual 30-day content calendar, captions, reel scripts, story prompts, and client-ready content brief.</p></div>
+    <button class="btn primary" onclick="showSection('generator',document.querySelector('[onclick*=generator]'))">Generate Final Product</button>
+  </div>
+  <section id="home" class="section active">
+    <div class="hero"><div class="hero-content"><div><span class="kicker">PathPay Product Kit</span><h1>Generate complete content packs. <span class="grad">No duplicates.</span></h1><p>Create the actual 30-day content calendar, captions, reel scripts, story prompts, and client-ready content brief. Each click generates a different style, structure, wording, CTA, angle, and layout so the product does not feel copied.</p><div class="hero-actions"><button class="btn primary" onclick="showSection('generator',document.querySelector('[onclick*=generator]'))">Generate Final Product</button><button class="btn" onclick="showSection('lead',document.querySelector('[onclick*=lead]'))">Find Leads</button></div></div><div class="card"><span class="tag yellow">Final output</span><h3 style="font-size:27px;margin-top:12px">Actual 30-day content pack</h3><p>People can preview it, copy it, download it, and sell it to a local business.</p></div></div></div>
+    <div class="grid grid-4"><div class="card stat"><span>Kit price</span><strong>$39</strong><small>one-time product</small></div><div class="card stat"><span>Client offer</span><strong>$49–$299</strong><small>example pricing</small></div><div class="card stat"><span>Output</span><strong>Final</strong><small>sellable product</small></div><div class="card stat"><span>Variation</span><strong>Random</strong><small>new each generation</small></div></div>
+  </section>
+  <section id="lead" class="section">
+    <div class="section-head"><div><span class="kicker">Lead Finder</span><h2>Find actual businesses to pitch</h2></div><p class="muted">Opens live searches and saves leads inside the dashboard.</p></div>
+    <div class="grid grid-2"><div class="card"><h3>Lead search filters</h3><div class="form-grid" style="margin-top:12px"><div class="field"><label>State</label><select id="leadState"><option>Ohio</option><option>Florida</option><option>Texas</option><option>California</option><option>New York</option><option>Georgia</option><option>North Carolina</option><option>Illinois</option><option>Arizona</option><option>Tennessee</option></select></div><div class="field"><label>City</label><input id="leadCity" value="Cincinnati"></div><div class="field"><label>Business type</label><select id="leadType"><option>med spa</option><option>barber shop</option><option>gym</option><option>coffee shop</option><option>boutique</option><option>restaurant</option><option>real estate agent</option><option>cleaning company</option><option>photographer</option><option>personal trainer</option></select></div><div class="field"><label>Opportunity</label><select id="leadNeed"><option>inconsistent posting</option><option>weak captions</option><option>no reel ideas</option><option>no monthly content plan</option><option>low engagement</option><option>boring social page</option></select></div></div><button class="btn primary full" style="margin-top:14px" onclick="createLeadSearch()">Generate Search Links</button><div id="leadSearchOutput" class="output output-html" style="min-height:300px;margin-top:14px">Generate search links to find real businesses.</div></div>
+    <div class="card"><h3>Save a lead</h3><div class="form-grid" style="margin-top:12px"><div class="field"><label>Business name</label><input id="saveName" placeholder="Paste business name"></div><div class="field"><label>Website / profile link</label><input id="saveLink" placeholder="Paste URL"></div><div class="field"><label>Phone / email</label><input id="saveContact" placeholder="Optional"></div><div class="field"><label>Opportunity note</label><input id="saveNote" placeholder="What needs improving?"></div></div><button class="btn green full" style="margin-top:14px" onclick="saveLead()">Add To Lead Pipeline</button><div id="leadList" class="lead-list" style="margin-top:14px"></div></div></div>
+  </section>
+  <section id="generator" class="section">
+    <div class="section-head"><div><span class="kicker">Final Product Generator</span><h2>Create the actual 30-day content pack</h2></div><p class="muted">Enter the business details, generate, then preview/copy/download the final product.</p></div>
+    <div class="grid grid-2"><div class="card"><h3>Business details</h3><div class="form-grid" style="margin-top:12px"><div class="field"><label>Business name</label><input id="bizName" value="Summit Roofing Co."></div><div class="field"><label>City / State</label><input id="bizLocation" value="Cincinnati, Ohio"></div><div class="field"><label>Business type</label><select id="bizType"><option>med spa</option><option>barber shop</option><option>gym</option><option>coffee shop</option><option>boutique</option><option>restaurant</option><option>real estate agent</option><option>cleaning company</option><option>photographer</option><option>personal trainer</option></select></div><div class="field"><label>Main problem</label><select id="bizNeed"><option>inconsistent posting</option><option>weak captions</option><option>no reel ideas</option><option>no monthly content plan</option><option>low engagement</option><option>boring social page</option></select></div><div class="field"><label>Tone</label><select id="tone"><option>Professional</option><option>Friendly</option><option>Premium</option><option>Direct</option><option>Modern</option></select></div><div class="field"><label>Product style</label><select id="style"><option>Authority Content Calendar</option><option>Local Hype Content Pack</option><option>Trust Builder Content System</option><option>Promo + Education Pack</option><option>Before/After Content Plan</option></select></div><div class="field" style="grid-column:1/-1"><label>Notes</label><textarea id="notes">Make the business look more trustworthy and easier to contact.</textarea></div></div><button class="btn primary full" style="margin-top:14px" onclick="generateProduct()">Generate Final Product</button><button class="btn full" style="margin-top:8px" onclick="copyFinalText()">Copy Final Product Text</button><button class="btn full" style="margin-top:8px" onclick="openFinalNewTab()">Open Final Product In New Tab</button></div><div class="card"><h3>Generated summary</h3><div id="summaryOutput" class="output output-html">Click generate to create the actual final product.</div></div></div>
+  </section>
+  <section id="preview" class="section"><div class="section-head"><div><span class="kicker">Final Product Preview</span><h2>This is what the buyer would sell</h2></div><p class="muted">Generated from the business details.</p></div><div id="finalPreview" class="final-doc">Generate a product first.</div></section>
+  <section id="code" class="section"><div class="section-head"><div><span class="kicker">Get The Product</span><h2>Copy or download the final product</h2></div><p class="muted">Copy/download the final deliverable. Website Builder also includes an index.html file for GitHub/Vercel.</p></div><div class="card"><button class="btn primary" onclick="copyFinalText()">Copy Text</button><button class="btn" onclick="copyFinalHTML()">Copy HTML</button><button class="btn" onclick="downloadFinalHTML()">Download HTML</button><button class="btn" onclick="downloadFinalTXT()">Download TXT</button><div id="codeOutput" class="code-box" style="margin-top:14px">Generate a product first.</div></div></section>
+
+  <section id="howto" class="section">
+    
+<div class="section-head"><div><span class="kicker">Delivery Steps</span><h2>How to turn the generated content into a clean client product</h2></div><p class="muted">This shows the buyer how to package the content pack so it feels like a real deliverable, not just copied text.</p></div>
+<div class="grid grid-2">
+  <div class="card">
+    <h3>Step-by-step delivery</h3>
+    <div class="checklist">
+      <div class="check"><strong>1. Generate the content pack.</strong><br>Review the 30-day calendar, captions, reel scripts, and story prompts.</div>
+      <div class="check"><strong>2. Copy or download the product.</strong><br>Use <strong>Copy Text</strong>, <strong>Download TXT</strong>, or <strong>Download HTML</strong>.</div>
+      <div class="check"><strong>3. Paste into Google Docs or Canva.</strong><br>Make it look clean with a title page, sections, and spacing.</div>
+      <div class="check"><strong>4. Add the client name.</strong><br>Put the business name on the cover and in the header.</div>
+      <div class="check"><strong>5. Clean up anything generic.</strong><br>Make the captions sound like the business and remove anything that feels too broad.</div>
+      <div class="check"><strong>6. Export as PDF.</strong><br>Send the client a clean PDF called <strong>30-Day Content Pack</strong>.</div>
+      <div class="check"><strong>7. Offer an upsell.</strong><br>Offer to turn the captions into designed posts or schedule the content monthly.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>What to send the client</h3>
+    <div class="script">Here is your 30-day content pack:
+
+[ATTACH PDF OR GOOGLE DOC LINK]
+
+It includes post ideas, captions, reel scripts, story prompts, and a simple posting plan. I recommend starting with Week 1 and adjusting based on what gets the most engagement.</div>
+    <h3 style="margin-top:14px">Best format</h3>
+    <div class="checklist">
+      <div class="check">Google Doc for editing.</div>
+      <div class="check">PDF for final delivery.</div>
+      <div class="check">Canva if you want to add branded design.</div>
+      <div class="check">Do not just send a wall of text in a message.</div>
+    </div>
+  </div>
+</div>
+
+  </section>
+  <section id="scripts" class="section"><div class="section-head"><div><span class="kicker">Scripts</span><h2>Sales, follow-up, and closing messages</h2></div><p class="muted">Use these to pitch the generated product.</p></div><div class="grid grid-2"><div class="card"><h3>First message</h3><div class="script">Hey, I came across your business and noticed a quick opportunity with your online presence.
+
+I put together a simple preview that could help make your business look more professional and make it easier for customers to take action.
+
+No pressure — want me to send it over?</div></div><div class="card"><h3>Follow-up</h3><div class="script">Hey, just wanted to follow up.
+
+I still think this could be a simple upgrade for your business because it gives customers a clearer reason to take action.
+
+Want me to send the quick preview?</div></div><div class="card"><h3>Price reply</h3><div class="script">The starter package keeps things simple and gives you the core asset, copy, and instructions.
+
+The upgraded version includes deeper customization, stronger polish, and extra delivery support.</div></div><div class="card"><h3>Closing message</h3><div class="script">If you want to move forward, I can package everything into one clean folder with the final product, instructions, and next-step checklist.
+
+I can also include one small revision so it fits your business better.</div></div></div></section>
+  <section id="pricing" class="section"><div class="section-head"><div><span class="kicker">Pricing</span><h2>How to package and sell it</h2></div><p class="muted">These are example ranges. Users should adjust based on skill, quality, scope, and client needs.</p></div><div class="grid grid-3"><div class="card"><span class="tag">Starter</span><h3>$49–$99</h3><p>A simple content idea pack with captions and a short posting plan.</p></div><div class="card"><span class="tag green">Core</span><h3>$149–$299</h3><p>A full 30-day content calendar with captions, reel scripts, story prompts, and one revision.</p></div><div class="card"><span class="tag yellow">Premium</span><h3>$399–$599</h3><p>Best if you include branded graphics, scheduling help, or monthly content support.</p></div></div></section>
+  <section id="delivery" class="section"><div class="section-head"><div><span class="kicker">Delivery</span><h2>How to deliver the final product</h2></div><p class="muted">This helps the buyer fulfill the work after a business says yes.</p></div><div class="grid grid-2"><div class="card"><h3>Delivery checklist</h3><div class="checklist"><div class="check">Confirm business details, services, location, contact info, and CTA.</div><div class="check">Generate the final product and review every section.</div><div class="check">Customize copy so it matches the business.</div><div class="check">Copy/download the final product.</div><div class="check">Send preview and deliverable in a clean folder.</div><div class="check">Offer one small revision if included.</div></div></div><div class="card"><h3>Client handoff message</h3><div class="script">Here is the completed package.
+
+I included the final product, copy/assets, and simple instructions. The next step is reviewing the details, making any small edits, and using it in your business.
+
+Let me know if you want one quick revision.</div></div></div></section>
+  <section id="reviews" class="section"><div class="section-head"><div><span class="kicker">Results</span><h2>Reviews and realistic expectations</h2></div><p class="muted">Trust-building copy without fake guarantees.</p></div><div class="grid grid-4"><div class="card stat"><span>Member rating</span><strong>4.8★</strong><small>example feedback</small></div><div class="card stat"><span>Product type</span><strong>Final</strong><small>sellable output</small></div><div class="card stat"><span>Main benefit</span><strong>Clarity</strong><small>know what to sell</small></div><div class="card stat"><span>Results</span><strong>Vary</strong><small>effort required</small></div></div><div class="grid grid-3" style="margin-top:14px"><div class="review"><div class="stars">★★★★★</div><p>“This made the offer feel real because I could actually show the product.”</p><footer><span>PathPay member</span><span>Generated product</span></footer></div><div class="review"><div class="stars">★★★★★</div><p>“I liked that it gave me the final output and the pitch.”</p><footer><span>PathPay member</span><span>Used the kit</span></footer></div><div class="review"><div class="stars">★★★★★</div><p>“The generated product made it easier to explain the value to a business.”</p><footer><span>PathPay member</span><span>Sent outreach</span></footer></div></div><div class="card" style="margin-top:14px"><p class="muted">Disclaimer: This kit provides tools, templates, and guidance. Results are not guaranteed and depend on effort, outreach, skill, market demand, product quality, and follow-through.</p></div></section>
+  <section id="faq" class="section"><div class="section-head"><div><span class="kicker">FAQ</span><h2>Common questions</h2></div><p class="muted">Built into the product dashboard.</p></div><div class="grid grid-2"><div class="faq"><h4>Does it create the actual final product?</h4><p>Yes. It creates the actual client-facing digital product, not just an idea or package plan.</p></div><div class="faq"><h4>Does it create the same thing every time?</h4><p>No. It changes copy, angles, sections, CTAs, colors, layouts, and structure based on the business details and random variation.</p></div><div class="faq"><h4>Can the buyer get the product?</h4><p>Yes. The buyer can copy the product, open it in a new tab, and download it as HTML or TXT. Website Builder downloads an index.html file for GitHub/Vercel.</p></div><div class="faq"><h4>Are results guaranteed?</h4><p>No. This gives the product, tools, and workflow. Results depend on outreach, quality, market demand, and follow-through.</p></div></div></section>
+  <p class="footer">AI Content Pack Kit · PathPay standalone product dashboard</p>
+</main>
+</div><div id="toast" class="toast"></div>
+<script>
+const CONFIG = {"slug": "ai-content-pack-v3-final", "title": "AI Content Pack Kit", "mark": "CP", "price": "$39", "clientPrice": "$149\u2013$699", "hero": "Generate complete content packs.", "tagline": "Create the actual 30-day content calendar, captions, reel scripts, story prompts, and client-ready content brief.", "productName": "30-day content pack", "businessTypes": ["med spa", "barber shop", "gym", "coffee shop", "boutique", "restaurant", "real estate agent", "cleaning company", "photographer", "personal trainer"], "needs": ["inconsistent posting", "weak captions", "no reel ideas", "no monthly content plan", "low engagement", "boring social page"], "styles": ["Authority Content Calendar", "Local Hype Content Pack", "Trust Builder Content System", "Promo + Education Pack", "Before/After Content Plan"], "leadChecks": ["Has not posted recently", "Posts have weak captions", "No clear content themes", "No reels or video content", "Business has good services but poor social proof"], "angles": ["authority and education", "local trust", "behind-the-scenes", "customer proof", "before-and-after", "monthly consistency"], "ctas": ["Book now", "Send a DM", "Claim this month\u2019s offer", "Schedule a visit", "Request details"], "layouts": ["magazine brief", "calendar board", "campaign pack", "studio deck", "brand system"], "colorSets": [["#0f172a", "#2563eb", "#38bdf8"], ["#111827", "#db2777", "#f9a8d4"], ["#1e1b4b", "#7c3aed", "#c4b5fd"], ["#064e3b", "#059669", "#6ee7b7"]]};
+
+let CURRENT_HTML = "";
+let CURRENT_TEXT = "";
+let CURRENT_FILENAME = CONFIG.slug + "-final-product";
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function uid(){return Math.random().toString(36).slice(2,8).toUpperCase()}
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function plainFromHTML(html){const d=document.createElement('div');d.innerHTML=html;return d.innerText}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1900)}
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const titles={
+    home:['Overview',CONFIG.tagline],
+    lead:['Lead Finder','Find actual businesses through live searches and save leads.'],
+    generator:['Final Product Generator','Create the actual client-ready digital product.'],
+    preview:['Final Product Preview','This is the product the buyer would sell to a business.'],
+    code:['Get The Product','Copy, download, or open the generated deliverable.'],
+    howto:['How To Use It','Step-by-step instructions for turning the generated product into a real client deliverable.'],
+    scripts:['Scripts + Follow-Up','Copy-paste outreach and closing messages.'],
+    pricing:['Pricing + Selling','Package the offer clearly.'],
+    delivery:['Delivery Checklist','Fulfill the service after landing a client.'],
+    reviews:['Reviews + Results','Build trust without fake guarantees.'],
+    faq:['FAQ','Common questions for buyers.']
+  };
+  document.getElementById('title').textContent=titles[id][0];
+  document.getElementById('subtitle').textContent=titles[id][1];
+  scrollTo({top:0,behavior:'smooth'});
+}
+function enc(s){return encodeURIComponent(s)}
+function createLeadSearch(){
+  const city=document.getElementById('leadCity').value||'your city', state=document.getElementById('leadState').value, type=document.getElementById('leadType').value, need=document.getElementById('leadNeed').value;
+  const q=`${type} in ${city} ${state}`;
+  const maps=`https://www.google.com/maps/search/${enc(q)}`;
+  const google=`https://www.google.com/search?q=${enc(q+' '+need+' contact website')}`;
+  const yelp=`https://www.yelp.com/search?find_desc=${enc(type)}&find_loc=${enc(city+', '+state)}`;
+  const insta=`https://www.google.com/search?q=${enc('site:instagram.com '+type+' '+city+' '+state)}`;
+  document.getElementById('leadSearchOutput').innerHTML=`
+  <h3>Live lead searches</h3>
+  <p><strong>Target:</strong> ${esc(type)} businesses in ${esc(city)}, ${esc(state)}</p>
+  <p><strong>Opportunity to look for:</strong> ${esc(need)}</p>
+  <div class="miniBox"><strong>Search phrase:</strong><br>${esc(q+' '+need)}</div>
+  <div class="lead-actions">
+    <a class="btn primary small" href="${maps}" target="_blank">Open Google Maps</a>
+    <a class="btn small" href="${google}" target="_blank">Open Google Search</a>
+    <a class="btn small" href="${yelp}" target="_blank">Open Yelp</a>
+    <a class="btn small" href="${insta}" target="_blank">Find Instagram Pages</a>
+  </div>
+  <h3>What to check</h3>
+  <ul>${CONFIG.leadChecks.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+  <p>Open the live search, pick real businesses, then paste the best ones into the lead pipeline.</p>`;
+}
+function getLeads(){return JSON.parse(localStorage.getItem(CONFIG.slug+'_leads')||'[]')}
+function renderLeads(){const box=document.getElementById('leadList');const leads=getLeads();box.innerHTML=leads.length?leads.map((l,i)=>`<div class="lead-row"><strong>${esc(l.name)}</strong><br><span class="muted">${esc(l.contact||'No contact saved')}</span><br><span class="muted">${esc(l.note||'')}</span><br>${l.link?`<a class="btn small" target="_blank" href="${esc(l.link)}">Open Link</a>`:''} <button class="btn small" onclick="removeLead(${i})">Remove</button></div>`).join(''):'<p class="muted">No leads saved yet.</p>'}
+function saveLead(){const leads=getLeads();leads.push({name:document.getElementById('saveName').value||'New Lead',link:document.getElementById('saveLink').value,contact:document.getElementById('saveContact').value,note:document.getElementById('saveNote').value});localStorage.setItem(CONFIG.slug+'_leads',JSON.stringify(leads));renderLeads();toast('Lead saved.')}
+function removeLead(i){const leads=getLeads();leads.splice(i,1);localStorage.setItem(CONFIG.slug+'_leads',JSON.stringify(leads));renderLeads()}
+function getDetails(){return {
+  name:document.getElementById('bizName').value||'Example Business',
+  loc:document.getElementById('bizLocation').value||'your city',
+  type:document.getElementById('bizType').value,
+  need:document.getElementById('bizNeed').value,
+  tone:document.getElementById('tone').value,
+  style:document.getElementById('style').value,
+  notes:document.getElementById('notes').value,
+  angle:pick(CONFIG.angles), cta:pick(CONFIG.ctas), id:uid(),
+  color:pick(CONFIG.colorSets), layout:pick(CONFIG.layouts)
+}}
+function setProduct(html, summary, filename){
+  CURRENT_HTML = html;
+  CURRENT_TEXT = plainFromHTML(html);
+  CURRENT_FILENAME = filename || CONFIG.slug + "-final-product";
+  document.getElementById('finalPreview').innerHTML = html;
+  document.getElementById('codeOutput').textContent = html;
+  document.getElementById('summaryOutput').innerHTML = summary;
+  showSection('preview',document.querySelector('[onclick*=preview]'));
+}
+function copyFinalText(){if(!CURRENT_TEXT){toast('Generate product first.');return}navigator.clipboard.writeText(CURRENT_TEXT);toast('Final product text copied.')}
+function copyFinalHTML(){if(!CURRENT_HTML){toast('Generate product first.');return}navigator.clipboard.writeText(CURRENT_HTML);toast('HTML/product code copied.')}
+function downloadFinalHTML(){if(!CURRENT_HTML){toast('Generate product first.');return}const blob=new Blob([CURRENT_HTML],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=CURRENT_FILENAME+'.html';a.click();URL.revokeObjectURL(url);toast('HTML file downloaded.')}
+function downloadFinalTXT(){if(!CURRENT_TEXT){toast('Generate product first.');return}const blob=new Blob([CURRENT_TEXT],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=CURRENT_FILENAME+'.txt';a.click();URL.revokeObjectURL(url);toast('Text file downloaded.')}
+function openFinalNewTab(){if(!CURRENT_HTML){toast('Generate product first.');return}const w=window.open();w.document.open();w.document.write(CURRENT_HTML);w.document.close();}
+function downloadWebsiteIndex(){downloadFinalHTML()}
+
+
+function generateProduct(){
+  const d=getDetails();
+  const themes=["Education","Trust","Behind the Scenes","Service Spotlight","FAQ","Customer Proof","Offer/CTA","Local Community","Before/After","Quick Tip","Myth Busting","Testimonial"];
+  const contentTypes=["Carousel","Reel","Story","Static Post","Short Video","Before/After"];
+  let days = Array.from({length:30},(_,i)=>`<tr><td>Day ${i+1}</td><td>${pick(contentTypes)}</td><td>${pick(themes)}</td><td>${esc(d.name)} ${pick(["educates customers about","shows the process behind","answers a common question about","highlights why customers choose","breaks down a mistake around"])} ${esc(d.type)}.</td><td>${esc(d.cta)}</td></tr>`).join('');
+  let captions = Array.from({length:14},()=>`<li>${esc(pick(["Not sure where to start?","Here’s one thing most customers miss:","A small detail that makes a big difference:","Before you book, check this:","Most people wait too long to ask this:"]))} ${esc(d.name)} helps ${esc(d.loc)} customers with ${esc(d.need)}. ${esc(d.cta)}.</li>`).join('');
+  let reels = Array.from({length:7},(_,i)=>`<div class="docbox"><h3>Reel ${i+1}: ${pick(["3 mistakes customers make","Behind the scenes","Before you choose","What to expect","Common question answered","Local customer tip","A quick transformation"])}</h3><p><strong>Hook:</strong> If you need a ${esc(d.type)} in ${esc(d.loc)}, watch this first.</p><p><strong>Shots:</strong> ${pick(["team/process/proof/CTA","before shot/process/result/CTA","problem/explanation/solution/CTA","customer question/answer/proof/CTA"])}</p><p><strong>CTA:</strong> ${esc(d.cta)}</p></div>`).join('');
+  CURRENT_HTML = `<div class="final-doc"><span class="pill">${esc(d.style)} · ${esc(d.layout)}</span><h1>30-Day Content Pack for ${esc(d.name)}</h1><p>This is a complete client-ready content system for a ${esc(d.type)} in ${esc(d.loc)} focused on ${esc(d.angle)} and ${esc(d.need)}.</p><h2>Content Pillars</h2><ul><li>Trust + proof</li><li>Service education</li><li>Local authority</li><li>FAQs and objections</li><li>Offers and CTAs</li></ul><h2>30-Day Calendar</h2><table border="1" cellspacing="0" cellpadding="8" style="width:100%;border-collapse:collapse"><tr><th>Day</th><th>Format</th><th>Theme</th><th>Post Idea</th><th>CTA</th></tr>${days}</table><h2>Caption Bank</h2><ol>${captions}</ol><h2>Reel Scripts</h2>${reels}<h2>Story Prompts</h2><ul><li>Poll: What do you care about most when choosing a ${esc(d.type)}?</li><li>Question box: Ask us anything about ${esc(d.type)} services.</li><li>Before/after proof post.</li><li>Customer reminder with CTA: ${esc(d.cta)}.</li></ul><h2>Monthly Upsell</h2><p>Offer this as a monthly content support package for $299–$699/month depending on post volume and design quality.</p></div>`;
+  setProduct(CURRENT_HTML, `<h2>Content pack generated for ${esc(d.name)}</h2><div class="miniBox"><strong>Variation ID:</strong> ${d.id}<br><strong>Layout:</strong> ${esc(d.layout)}<br><strong>Angle:</strong> ${esc(d.angle)}</div><p>The 30-day calendar, captions, reel scripts, story prompts, and upsell plan are ready.</p>`, CONFIG.slug+"-"+d.id);
+  toast('Content pack generated.');
+}
+
+renderLeads();
+</script></body></html>
